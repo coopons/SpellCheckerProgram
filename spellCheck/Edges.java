@@ -11,8 +11,6 @@ public class Edges {
 			throw new IllegalArgumentException("vertex index must be a non-negative integer");
 		if (v2.getIndex() < 0)
 			throw new IllegalArgumentException("vertex index must be a non-negative integer");
-		if (Double.isNaN(weight))
-			throw new IllegalArgumentException("Weight is NaN");
 		this.vertex1 = v1;
 		this.vertex2 = v2;
 		this.edgeWeight = weight;

@@ -1,9 +1,5 @@
 package spellCheck;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -25,7 +21,7 @@ public class Main {
 		try (Scanner userInput = new Scanner(System.in)) {
 			System.out.println("Please enter a word: ");
 			word = userInput.next().toLowerCase().replaceAll("[^a-zA-Z]", "");
-			sc.checkSpelling(word);
+			sc.isWordSpelledCorrectly(word);
 		}
 	}
 

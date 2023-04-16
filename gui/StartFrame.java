@@ -22,6 +22,7 @@ public class StartFrame extends JFrame {
 
 	private JPanel contentPane;
 	private static JTextField textField;
+	private SpellCheckFrame frame = new SpellCheckFrame();
 
 	/**
 	 * Launch the application.
@@ -69,7 +70,6 @@ public class StartFrame extends JFrame {
 		
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setDropMode(DropMode.ON);
 		textField.setMinimumSize(new Dimension(150, 25));
 		textField.setBackground(new Color(255, 255, 255));
 		contentPane.add(textField, "cell 0 2,alignx center");
@@ -78,10 +78,8 @@ public class StartFrame extends JFrame {
 		JButton btnAddWord = new JButton("Add");
 		btnAddWord.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnAddWord.setOpaque(false);
-		btnAddWord.setBackground(new Color(214, 214, 214));
 		btnAddWord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				addWord(textField.getText());
 				//TODO
 			}
 		});
@@ -90,34 +88,25 @@ public class StartFrame extends JFrame {
 		JButton btnDelWord = new JButton("Delete");
 		btnDelWord.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnDelWord.setOpaque(false);
-		btnDelWord.setBackground(new Color(214, 214, 214));
 		contentPane.add(btnDelWord, "cell 0 3,gapx 30px 70px,grow");
+		btnDelWord.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO
+			}
+		});
 		
 		JButton btnNext = new JButton("Next");
+		btnNext.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(true);
+				dispose();
+			}
+		});
 		btnNext.setPreferredSize(new Dimension(120, 30));
 		btnNext.setOpaque(false);
 		btnNext.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		contentPane.add(btnNext, "cell 0 4,alignx center");
-		btnDelWord.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				delWord(textField.getText());
-				//TODO
-			}
-		});
+		
 	}
 	
-	public static Boolean isWordInDictionary(String word) {
-		//return dictionary.containsKey(word);
-		return null;
-	}
-	
-	private void addWord(String word) {
-		isWordInDictionary(word);
-		//TODO
-	}
-
-	private void delWord(String word) {
-		isWordInDictionary(word);
-		//TODO
-	}
 }

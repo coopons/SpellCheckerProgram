@@ -19,7 +19,6 @@ public class Graph {
 
 	public Graph(String filePath) {
 		try (Scanner dictScanner = new Scanner(new File(filePath))) {
-
 			Map<String, Integer> dictionary = new HashMap<>();
 			while (dictScanner.hasNextLine()) {
 				String line = dictScanner.nextLine().toLowerCase();
@@ -38,27 +37,32 @@ public class Graph {
 				vertices.add(v);
 				index++;
 			}
+			calculateEdgeWeights();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void addVertex(Vertex v) {
-		vertices.add(v);
-	}
-
-	public void addEdge(Vertex v1, Vertex v2, double weight) {
+	public void addEdge(Vertex v1, Vertex v2, int weight) {
 		Edge e = new Edge(v1.getIndex(), v2.getIndex(), weight);
 		graph.addEdge(e);
 		v1.addEdge(e);
 		v2.addEdge(e);
 	}
 	
+	public void addVertex(Vertex v) {
+		vertices.add(v);
+		for (Vertex u : vertices) {
+			int weight = levenshteinDistance(u.getWord(), v.getWord());
+			addEdge(v, u, weight);
+		}
+	}
+	
 	public void delVertex (Vertex v) {
 		//TODO
 	}
 	
-	public void delEdge (Edge e) {
+	private void delEdge (Edge e) {
 		//TODO
 	}
 
@@ -86,7 +90,7 @@ public class Graph {
 
 	}
 
-	public static int levenshteinDistance(String s1, String s2) {
+	private static int levenshteinDistance(String s1, String s2) {
 		int[][] distance = new int[s1.length() + 1][s2.length() + 1];
 		for (int i = 0; i <= s1.length(); i++) {
 			distance[i][0] = i;
@@ -102,12 +106,10 @@ public class Graph {
 						distance[i - 1][j - 1] + cost);
 			}
 		}
-
 		return distance[s1.length()][s2.length()];
-
 	}
 
-	public void calculateEdgeWeights() {
+	private void calculateEdgeWeights() {
 		for (int i = 0; i < vertices.size(); i++) {
 			for (int j = i + 1; j < vertices.size(); j++) {
 				String s1 = vertices.get(i).getWord();

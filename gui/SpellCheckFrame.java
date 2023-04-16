@@ -46,6 +46,7 @@ public class SpellCheckFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(550, 330);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setBackground(new Color(211, 211, 211));
@@ -63,7 +64,7 @@ public class SpellCheckFrame extends JFrame {
 		txtExplain.setEditable(false);
 		txtExplain.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		txtExplain.setText(
-				"Type any word, click submit, and the program will check the spelling of the provided word in the stored dictionary. If the word is spelled correctly, the text will turn green. Otherwise, the text will turn red, and you will be given suggestions of words similar to the provided word.");
+				"Type any word, click submit, and the program will check the spelling of the provided word in the stored dictionary. The program will notify the user whether or not the word is spelled correctly. If the word is spelled incorreclty, the user will be given suggestions of words similar to the provided word.");
 		contentPane.add(txtExplain, "cell 0 1,alignx center");
 
 		JLabel lblInputLabel = new JLabel("");
@@ -82,18 +83,16 @@ public class SpellCheckFrame extends JFrame {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (textField.getText().isBlank()) {
-					
+					System.out.println("is blank");
 				} else {
-					if (StartFrame.isWordInDictionary(textField.getText())) {
-						lblInputLabel.setText("Word is spelled correctly");
-						textField.setSelectedTextColor(Color.green);
-					} else {
-						lblInputLabel.setText("Word is spelled wrong");
-						textField.setSelectedTextColor(Color.red);
-					}
-					contentPane.add(lblInputLabel, "flowy,cell 0 1,alignx center,aligny bottom,gaptop 30");
+					System.out.println("not blank");
+					lblInputLabel.setText("Word is spelled correctly");
+					
+					contentPane.add(lblInputLabel, "cell 0 2,alignx center,aligny bottom");
+					lblInputLabel.setVisible(true);
+					setSize(550, 331);
 				}
-
+				setSize(550, 330);
 			}
 		});
 
